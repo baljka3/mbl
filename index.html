@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Pookie... 💕</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: fixed;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        font-family: "Poppins", sans-serif;
+        padding: 15px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 30px 20px;
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(225, 75, 120, 0.2);
+        text-align: center;
+        max-width: 380px;
+        width: 100%;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        position: relative;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .header_text {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #d6336c;
+        margin-bottom: 5px;
+        line-height: 1.3;
+      }
+
+      .sub_text {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .gif_container img {
+        width: 130px;
+        height: auto;
+        border-radius: 16px;
+      }
+
+      /* Товчлуур байрлах хэсэг */
+      .buttons {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 60px;
+      }
+
+      .btn {
+        background-color: #ff4b72;
+        color: #ffffff;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 75, 114, 0.3);
+        transition: transform 0.15s ease;
+        white-space: nowrap;
+      }
+
+      #noButton {
+        background-color: #ffffff;
+        color: #ff4b72;
+        border: 2px solid #ff4b72;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        /* Зугтах үед зөөлөн хөдөлгөөнтэй байна */
+        transition: left 0.15s ease-out, top 0.15s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="cardContainer">
+      <div>
+        <h1 class="header_text">MB, надтай хамт болзоонд явах уу? 🥺</h1>
+        <p class="sub_text">😊</p>
+
+        <div class="gif_container">
+          <img
+            src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif"
+            alt="Cute animated GIF"
+          />
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="yesButton" onclick="nextPage()">
+          Тэгье, тэгье! 🥰
+        </button>
+
+        <button class="btn" id="noButton">
+          Үгүй... 🥹
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function nextPage() {
+        window.location.href = "yes.html";
+      }
+
+      const noBtn = document.getElementById("noButton");
+      const card = document.getElementById("cardContainer");
+
+      function moveButton(e) {
+        if (e) {
+          e.preventDefault();
+        }
+
+        // Анх удаа хүрэхэд л absolute болгож карт дотор зугтуулна
+        noBtn.style.position = "absolute";
+
+        const cardRect = card.getBoundingClientRect();
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+
+        const padding = 15;
+        const maxX = cardRect.width - btnWidth - padding;
+        const maxY = cardRect.height - btnHeight - padding;
+
+        const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+        noBtn.style.left = `${randomX}px`;
+        noBtn.style.top = `${randomY}px`;
+      }
+
+      // Компьютерт
+      noBtn.addEventListener("mouseover", moveButton);
+      
+      // Гар утас ба Таблетад
+      noBtn.addEventListener("touchstart", moveButton, { passive: false });
+      noBtn.addEventListener("click", moveButton);
+    </script>
+  </body>
+</html>
